@@ -1,10 +1,10 @@
 import pytest
 
-def test_always_pass():
+def test_pass():
     """A dummy test that always passes"""
     assert True
 
-def test_always_fail():
+def test_fail():
     """A dummy test that always fails"""
     assert False
 
