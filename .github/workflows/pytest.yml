@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest
+          pip install pytest requests
 
       - name: Run tests
         id: run_tests
@@ -28,6 +28,8 @@ jobs:
           pytest tests/ --tb=short | tee pytest_output.txt
         continue-on-error: true
 
-      - name: Process test results
+      - name: Process test results and create issues
         run: python .github/scripts/log_failed_tests.py
         if: failure()
+        env:
+          ISSUE_TOKEN: ${{ secrets.ISSUE_TOKEN }}
