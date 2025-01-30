@@ -38,8 +38,13 @@ def parse_failed_tests():
     with open("pytest_output.txt", "r") as f:
         log_data = f.read()
 
-    failed_tests = re.findall(r"(tests/.*?):(\d+) in (\w+)", log_data)
-    return [(match[2], match[0]) for match in failed_tests]
+    print("Pytest Output:\n", log_data)  # Debugging output
+
+    failed_tests = re.findall(r"FAILED (\S+)::(\S+) ", log_data)  
+
+    print(f"Parsed Failed Tests: {failed_tests}")  # Debugging output
+
+    return [(test_name, file_name) for file_name, test_name in failed_tests]
 
 if __name__ == "__main__":
     existing_issues = get_existing_issues()
