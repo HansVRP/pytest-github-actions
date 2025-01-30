@@ -28,7 +28,7 @@ jobs:
           pytest tests/ --tb=short | tee pytest_output.txt
         continue-on-error: true
 
-       - name: Debug Pytest Output
+      - name: Debug Pytest Output
         run: cat pytest_output.txt || echo "No pytest output found"
 
       - name: Process test results and create issues
