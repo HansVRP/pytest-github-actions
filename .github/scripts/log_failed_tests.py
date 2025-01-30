@@ -3,7 +3,7 @@ import re
 import requests
 
 GITHUB_REPO = "HansVRP/pytest-github-actions"
-GITHUB_TOKEN = os.getenv("ISSUE_TOKEN")  # This will read the secret
+GITHUB_TOKEN = os.getenv("PYTESTS_ISSUE_GEN")  # This will read the secret
 ISSUE_LABEL = "test-failure"
 
 def get_existing_issues():
