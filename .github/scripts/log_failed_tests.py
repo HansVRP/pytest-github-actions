@@ -1,9 +1,10 @@
+#%%
 import os
 import re
 import requests
 
 GITHUB_REPO = "HansVRP/pytest-github-actions"
-GITHUB_TOKEN = os.getenv("PYTESTS_ISSUE_GEN")  # This will read the secret
+GITHUB_TOKEN = os.getenv("ISSUE_TOKEN")  # This will read the secret
 ISSUE_LABEL = "test-failure"
 
 def get_existing_issues():
@@ -46,6 +47,7 @@ def parse_failed_tests():
 
     return [(test_name, file_name) for file_name, test_name in failed_tests]
 
+
 if __name__ == "__main__":
     existing_issues = get_existing_issues()
     failed_tests = parse_failed_tests()
@@ -55,3 +57,4 @@ if __name__ == "__main__":
             create_issue(test_name, "Test failed", file_name)
         else:
             print(f"Issue already exists for: {test_name}")
+
