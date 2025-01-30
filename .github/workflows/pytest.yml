@@ -22,16 +22,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest requests
 
-      - name: Debug Secrets
-        run: |
-          if [ -z "$ISSUE_TOKEN" ]; then
-            echo "ISSUE_TOKEN is NOT set in GitHub Actions."
-            exit 1
-          else
-            echo " ISSUE_TOKEN is set (Length: ${#ISSUE_TOKEN})"
-          fi
-        env:
-          ISSUE_TOKEN: ${{ secrets.ISSUE_TOKEN }}
 
       - name: Run tests
         id: run_tests
@@ -40,6 +30,8 @@ jobs:
         continue-on-error: true
 
       - name: Process test results and create issues
+        env:
+          ISSUE_TOKEN: ${{ secrets.ISSUE_TOKEN }}
         run: |
           if grep -q "FAILED" pytest_output.txt; then
             python .github/scripts/log_failed_tests.py
