@@ -9,7 +9,7 @@ ISSUE_LABEL = "test-failure"
 
 def get_existing_issues():
     url = f"https://api.github.com/repos/{GITHUB_REPO}/issues"
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    headers = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         issues = response.json()
@@ -21,7 +21,7 @@ def get_existing_issues():
 def create_issue(test_name, error_msg, file_name):
     url = f"https://api.github.com/repos/{GITHUB_REPO}/issues"
     headers = {
-        "Authorization": f"token {GITHUB_TOKEN}",
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json",
     }
     data = {
